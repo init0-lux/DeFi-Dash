@@ -2,120 +2,174 @@
 
 > **MCP-Enabled Multi-Chain DeFi Dashboard for Aya AI Hackathon**
 
-A unified dashboard that aggregates wallet balances, DeFi positions, and yield opportunities across multiple blockchains, exposing all functionality via MCP (Model Context Protocol) for seamless AI integration.
+## 📞 Contact Information
+- **Primary Contact:** Ojaswi Om
+- **Telegram Handle:** @ab_init0
+- **Team:** Solo
 
-![DeFi Dashboard](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
-![License](https://img.shields.io/badge/License-MIT-blue)
-![Python](https://img.shields.io/badge/Python-3.8+-blue)
-![Next.js](https://img.shields.io/badge/Next.js-14+-black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue)
+## 🎯 Project Overview
+**Project Title:** MCP-Enabled DeFi Dashboard
 
-## ✨ Features
+**One-Sentence Elevator Pitch:** One dashboard to manage your DeFi, across chains, powered by AI. no code, no tabs, just results.
 
-- **🔗 Multi-Chain Support** - Ethereum, Polygon, Base, Arbitrum
-- **�� Real-Time Balances** - Native tokens and ERC-20 balances
-- **�� DeFi Positions** - Aave, Uniswap, Compound integrations
-- **📈 Yield Opportunities** - Risk-scored yield farming options
-- **🤖 AI-Ready** - MCP server for AI agent integration
-- **🎨 Modern UI** - Clean, responsive dashboard with shadcn/ui
-- **⚡ Real-Time Data** - Live price feeds and position updates
+## 📖 Project Description
 
+The MCP-Enabled DeFi Dashboard represents a comprehensive solution for unified cryptocurrency portfolio management and DeFi protocol interaction across multiple blockchain networks. This project addresses the critical pain point of fragmented DeFi experiences by providing a single, cohesive interface that aggregates wallet balances, tracks DeFi positions, identifies yield opportunities, and simulates token swaps across Ethereum, Polygon, Base, and Arbitrum networks.
 
-## 🛠️ Tech Stack
+At its core, the system leverages the Model Context Protocol (MCP) to create a bridge between traditional web interfaces and AI agent capabilities, enabling seamless integration with AI assistants like Aya. The backend utilizes FastMCP to expose DeFi functionality as JSON-RPC tools, allowing AI agents to programmatically access portfolio data, execute complex DeFi operations, and provide intelligent financial recommendations.
 
-### Backend
-- **FastMCP** - MCP server framework
-- **Python 3.8+** - Core logic
-- **Web3.py** - Blockchain interactions
-- **httpx** - Async HTTP client
+The frontend is built with Next.js and TypeScript, featuring a modern, responsive design using shadcn/ui components. The architecture implements a proxy pattern to handle CORS issues while maintaining clean separation between the presentation layer and blockchain interactions. Real-time data integration connects to multiple APIs including CoinGecko for price feeds, DeFi Llama for yield opportunities, and direct blockchain RPC endpoints for balance queries.
 
-### Frontend
-- **Next.js 14** - React framework
-- **TypeScript** - Type safety
-- **shadcn/ui** - UI components
-- **Tailwind CSS** - Styling
+The system supports comprehensive DeFi protocol integration including Aave for lending positions, Uniswap for liquidity provision, and Compound for yield farming. Each tool within the MCP server is designed with enterprise-grade error handling, proper session management, and extensible architecture to accommodate future protocol additions. The dashboard provides users with actionable insights through risk-scored yield opportunities, real-time portfolio valuation, and cross-chain position tracking.
 
-### APIs & Services
-- **Infura/Alchemy** - Ethereum RPC
-- **CoinGecko** - Price feeds
-- **DeFi Llama** - Yield data
-- **Aave/Uniswap** - Protocol data
+This project demonstrates the potential for AI-driven DeFi management by creating an interface that serves both human users and AI agents through the same underlying infrastructure, ultimately reducing the complexity of multi-chain DeFi operations while maintaining the flexibility required for sophisticated financial strategies.
 
-## �� Quick Start
+## 🛠️ Installation Steps
 
-### 1. Clone & Setup
+### Prerequisites
+- Python 3.8+
+- Node.js 18+
+- npm or yarn
+
+### Backend Setup
 ```bash
+# Clone repository
 git clone <repository-url>
 cd defi_dash
-```
 
-### 2. Backend Setup
-```bash
+# Install Python dependencies
 cd mcp_server
-pip install -r requirements.txt
+pip install fastmcp web3 httpx
+
+# Start MCP server
 python dashboard_server.py
 ```
 
-### 3. Frontend Setup
+### Frontend Setup
 ```bash
+# Install Node.js dependencies
 cd frontend
 npm install
+
+# Start development server
 npm run dev
 ```
 
-### 4. Access Dashboard
-Open [http://localhost:3000](http://localhost:3000)
+### Access Application
+- Frontend: http://localhost:3000
+- MCP Server: http://localhost:8000
 
-## 📖 Usage
+## 🔧 Environment Variables
 
-### For Users
-1. **Enter Wallet Addresses** - Paste comma-separated addresses
-2. **Click Random Addresses** - Use demo addresses for testing
-3. **Fetch Data** - Click buttons to load portfolio, positions, yields
-4. **View Results** - Real-time data in clean tables and cards
+### Backend (.env in mcp_server/)
+```bash
+# MCP Server Configuration
+MCP_SERVER_PORT=8000
 
-### For AI Agents
+# Blockchain RPC Endpoints (Optional - for real data)
+ETHEREUM_RPC_URL=https://mainnet.infura.io/v3/YOUR_INFURA_KEY
+POLYGON_RPC_URL=https://polygon-rpc.com
+BASE_RPC_URL=https://mainnet.base.org
+ARBITRUM_RPC_URL=https://arb1.arbitrum.io/rpc
+
+# API Keys (Optional - for enhanced features)
+COINGECKO_API_KEY=your_coingecko_api_key
+DEFILLAMA_API_KEY=your_defillama_api_key
+```
+
+### Frontend (.env.local in frontend/)
+```bash
+# MCP Server URL (defaults to proxy)
+NEXT_PUBLIC_MCP_URL=http://localhost:8000/mcp/
+
+# Optional: Direct MCP server URL (if not using proxy)
+NEXT_PUBLIC_MCP_DIRECT_URL=http://localhost:8000/mcp/
+```
+
+## 📖 Usage Examples
+
+### Web Dashboard Usage
+1. **Enter Wallet Addresses**: Paste comma-separated wallet addresses
+2. **Use Demo Addresses**: Click random address boxes for testing
+3. **Fetch Portfolio**: Click "Portfolio" to get multi-chain balances
+4. **View Positions**: Click "Positions" to see DeFi protocol positions
+5. **Explore Yields**: Click "Yields" to find yield farming opportunities
+6. **Check Prices**: Click "Prices" for real-time token prices
+
+### AI Agent Integration
 ```bash
 # Initialize MCP session
 curl -X POST http://localhost:8000/mcp/ \
   -H "Content-Type: application/json" \
   -H "Accept: application/json, text/event-stream" \
-  -d '{"jsonrpc": "2.0", "method": "initialize", "id": 1, "params": {...}}'
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "initialize",
+    "id": 1,
+    "params": {
+      "protocolVersion": "2025-06-18",
+      "capabilities": {},
+      "clientInfo": {"name": "ai-agent", "version": "1.0.0"}
+    }
+  }'
 
 # Get portfolio summary
 curl -X POST http://localhost:8000/mcp/ \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
   -H "mcp-session-id: <session-id>" \
-  -d '{"jsonrpc": "2.0", "method": "tools/call", "params": {"name": "get_portfolio_summary", "arguments": {"wallet_addresses": ["0x..."]}}, "id": 2}'
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+      "name": "get_portfolio_summary",
+      "arguments": {
+        "wallet_addresses": ["0x1234567890abcdef1234567890abcdef12345678"]
+      }
+    },
+    "id": 2
+  }'
+
+# Get DeFi positions
+curl -X POST http://localhost:8000/mcp/ \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -H "mcp-session-id: <session-id>" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+      "name": "get_defi_positions",
+      "arguments": {
+        "wallet_address": "0x1234567890abcdef1234567890abcdef12345678"
+      }
+    },
+    "id": 3
+  }'
 ```
 
-## 🔧 MCP Tools
-
+### Available MCP Tools
 | Tool | Description | Parameters |
 |------|-------------|------------|
-| `get_token_balance` | Get token balances | `wallet_address`, `chain` |
-| `get_portfolio_summary` | Aggregate portfolio | `wallet_addresses` |
-| `get_defi_positions` | DeFi positions | `wallet_address` |
-| `get_yield_opportunities` | Yield farming | `wallet_address`, `amount` |
-| `get_token_prices` | Price feeds | `tokens` |
-| `execute_simple_swap` | Swap simulation | `from_token`, `to_token`, `amount` |
+| `get_token_balance` | Get token balances for a wallet | `wallet_address`, `chain` |
+| `get_portfolio_summary` | Aggregate portfolio across chains | `wallet_addresses` |
+| `get_defi_positions` | Get DeFi protocol positions | `wallet_address` |
+| `get_yield_opportunities` | Find yield farming opportunities | `wallet_address`, `amount` |
+| `get_token_prices` | Get real-time token prices | `tokens` |
+| `execute_simple_swap` | Simulate token swap | `from_token`, `to_token`, `amount`, `wallet_address` |
 
-## 🎯 Project Goals
+## ⚠️ Known Issues
 
-- **Unified Experience** - One dashboard for all DeFi operations
-- **AI Integration** - Seamless MCP tool access for AI agents
-- **Multi-Chain** - Support for major L1/L2 networks
-- **Real-Time Data** - Live blockchain and DeFi protocol data
-- **Enterprise Ready** - Production-grade code and architecture
+1. **CORS Issues**: The frontend uses a proxy to avoid CORS problems with the MCP server. If direct connection is needed, configure CORS headers in the backend.
 
-## 🤝 Contributing
+2. **Session Management**: MCP sessions may timeout after extended periods. The frontend automatically reinitializes sessions when needed.
 
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
+3. **Stubbed Data**: Current implementation uses stubbed data for demonstration. Real blockchain integration requires API keys and RPC endpoints.
 
----
+4. **Network Dependencies**: Real-time data depends on external APIs (CoinGecko, DeFi Llama). Network issues may affect data freshness.
 
-**Built for the Aya AI Hackathon** 🎉  
-*Empowering AI agents to interact with DeFi protocols*
+5. **Wallet Validation**: Input validation for wallet addresses is basic. Invalid addresses may cause errors.
+
+6. **Performance**: Large portfolios with many addresses may experience slower loading times.
+
+## 🏗️ Architecture
